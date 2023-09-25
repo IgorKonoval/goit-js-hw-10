@@ -7,12 +7,15 @@ axios.defaults.headers.common['x-api-key'] =
 const BASE_URL = `https://api.thecatapi.com/v1/`;
 
 function fetchBreeds() {
-  return fetch(`${BASE_URL}breeds`, axios).then(resp => {
-    if (!resp.ok) {
-      throw new Error(resp.statusText);
-    }
-    return resp.json();
-  });
+  return axios
+    .get(`${BASE_URL}breeds`)
+    .then(response => response.data)
+    .catch(error => {
+      Notiflix.Notify.failure(
+        'Oops! Something went wrong! Try reloading the page or select another cat breed!'
+      );
+      throw error;
+    });
 }
 
 function fetchCatByBreed(breedId) {

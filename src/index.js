@@ -14,19 +14,28 @@ loader.style.display = 'none';
 error.style.display = 'none';
 catInfo.style.display = 'none';
 
-function catsSelect(breeds) {
-  breedSelect.innerHTML = '';
-  breeds.forEach(breed => {
-    const option = document.createElement('option');
-    option.value = breed.id;
-    option.textContent = breed.name;
-    breedSelect.appendChild(option);
-  });
-}
+// function catsSelect(breeds) {
+//   breedSelect.innerHTML = '';
+//   breeds.forEach(breed => {
+//     const option = document.createElement('option');
+//     option.value = breed.id;
+//     option.textContent = breed.name;
+//     breedSelect.appendChild(option);
+//   });
+// }
+
+// function catsSelect(breeds) {
+//   breedSelect.innerHTML = breeds
+//     .map(breed => `<option value="${breed.id}">${breed.name}</option>`)
+//     .join('');
+// }
 
 fetchBreeds()
   .then(breeds => {
-    catsSelect(breeds);
+    // catsSelect(breeds);
+    breedSelect.innerHTML = breeds
+      .map(breed => `<option value="${breed.id}">${breed.name}</option>`)
+      .join('');
     new SlimSelect({
       select: '#single',
     });
